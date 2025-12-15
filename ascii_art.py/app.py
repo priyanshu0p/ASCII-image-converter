@@ -1,15 +1,13 @@
 import streamlit as st
 import PIL.Image
-import PIL.ImageEnhance # <--- NEW: Library to fix blurry images
+import PIL.ImageEnhance 
 
-# --- THE LOGIC ---
+
 CHARS_HEAVY_TO_LIGHT = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
 CHARS_LIGHT_TO_HEAVY = CHARS_HEAVY_TO_LIGHT[::-1]
 
 def resize_image(image, new_width=100, vertical_scale=1.65):
     width, height = image.size
-    # vertical_scale controls how "tall" the lines are. 
-    # If the image looks stretched, increase this number.
     ratio = height / width / vertical_scale 
     new_height = int(new_width * ratio)
     resized_image = image.resize((new_width, new_height))
@@ -67,7 +65,7 @@ if uploaded_file is not None:
     with st.expander("See what the computer sees (Grayscale Preview)"):
         st.image(grayify(image), width=300)
 
-    # --- CONVERSION ---
+    # convertion
     if invert:
         active_chars = CHARS_LIGHT_TO_HEAVY 
     else:
